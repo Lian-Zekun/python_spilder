@@ -151,18 +151,18 @@ def main(name, choose_id):
     if choose_id == 1:
         url = 'https://music.163.com/#/search/m/?s={}&type=1'.format(name)
         com = search_input_song(url)
+        ids = []
         for i, j in com:
+            ids.append(j)
             print("演唱者:{0}-------id:{1}".format(i, j))
         while True:
             id = input("请输入需要下载的id(输入q退出):")
             if id == 'q':
                 return
-            else:
-                for i in com:
-                    if id in i:
-                        song_id_down(id)
-                        return
-                print("请输入正确的id!!!")
+            if id in ids:
+                song_id_down(id)
+                return
+            print("请输入正确的id!!!")
     elif choose_id == 2:
         url = 'https://music.163.com/#/search/m/?s={}&type=100'.format(name)
         id = search_input_artist(url)
@@ -170,18 +170,18 @@ def main(name, choose_id):
     elif choose_id == 3:
         url = 'https://music.163.com/#/search/m/?s={}&type=1000'.format(name)
         com = search_input_playlist(url)
+        ids = []
         for i, j in com:
+            ids.append(j)
             print("歌单名称:{0}-------id:{1}".format(i, j))
         while True:
             id = input("请输入需要下载的id(输入q退出):")
             if id == 'q':
                 return
-            else:
-                for i in com:
-                    if id in i:
-                        playlist_id_down(id)
-                        return
-                print("请输入正确的id(输入q退出):")
+            if id in ids:
+                playlist_id_down(id)
+                return
+            print("请输入正确的id(输入q退出):")
 
 
 def recognition():
