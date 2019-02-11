@@ -1,10 +1,10 @@
 import requests
-import platform
-import os
-import time
 from urllib import request
 from lxml import etree
 from selenium import webdriver
+import platform
+import os
+import time
 
 
 headers = {
@@ -26,7 +26,7 @@ def get_url(url):
 
 
 def download_song(song_id, song_name):
-    """从链接中提取id和名字，通过外链下载歌曲"""
+    """通过外链下载歌曲"""
 
     url = 'https://music.163.com/song/media/outer/url?id={}.mp3'.format(song_id)
 
@@ -49,9 +49,8 @@ def download(items):
     print("－－－－－－－下载完成－－－－－－－")
 
 
-# 根据歌手下载
 def artist_id_down(id):
-    """根据歌手id或歌单id下载全部歌曲"""
+    """根据歌手id下载全部歌曲"""
 
     artist_url = 'https://music.163.com/artist?id={}'.format(id)
 
@@ -59,8 +58,8 @@ def artist_id_down(id):
     download(items)
 
 
-# 根据歌单下载
 def playlist_id_down(id):
+    """根据歌单id下载全部歌曲"""
     playlist_url = 'https://music.163.com/playlist?id={}'.format(id)
 
     items = get_url(playlist_url)
@@ -78,7 +77,6 @@ def get_song_name(url):
     return name[0]
 
 
-# 根据歌曲下载
 def song_id_down(id):
     """根据歌曲id下载"""
 
