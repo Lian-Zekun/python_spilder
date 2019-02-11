@@ -111,12 +111,13 @@ def search_input_song(url):
 
     root = etree.HTML(html)
     id = root.xpath('//div[@class="srchsongst"]//div[@class="td w0"]//div[@class="text"]/a[1]/@href')
-    name = root.xpath('//div[@class="srchsongst"]//div[@class="td w1"]//div[@class="text"]/a[1]/text()')
+    artist = root.xpath('//div[@class="srchsongst"]//div[@class="td w1"]//div[@class="text"]/a[1]/text()')
+    name = root.xpath('//div[@class="srchsongst"]//div[@class="td w0"]//div[@class="text"]//b/@title')
 
     if not id:
         return "请输入正确的歌曲名称"
     id = [i.strip('/song?id==') for i in id]
-    return zip(name, id)
+    return zip(name, artist, id)
 
 
 def search_input_artist(url):
@@ -152,9 +153,9 @@ def main(name, choose_id):
         url = 'https://music.163.com/#/search/m/?s={}&type=1'.format(name)
         com = search_input_song(url)
         ids = []
-        for i, j in com:
-            ids.append(j)
-            print("演唱者:{0}-------id:{1}".format(i, j))
+        for i, j, k in com:
+            ids.append(k)
+            print("歌曲名称:{0}-------演唱者:{1}-------id:{2}".format(i, j, k))
         while True:
             id = input("请输入需要下载的id(输入q退出):")
             if id == 'q':
