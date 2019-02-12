@@ -21,6 +21,7 @@ def get_url(url):
 
     root = etree.HTML(req.text)
     items = root.xpath('//ul[@class="f-hide"]//a')
+    print(items)
 
     return items
 
@@ -96,6 +97,7 @@ def selenium_get_html(url):
     driver = webdriver.Chrome(chrome_options=options)
     driver.get(url)
     driver.switch_to.frame('contentFrame')
+    driver.close()
     return driver.page_source
 
 
@@ -109,8 +111,6 @@ def search_input_song(url):
     artist = root.xpath('//div[@class="srchsongst"]//div[@class="td w1"]//div[@class="text"]/a[1]/text()')
     name = root.xpath('//div[@class="srchsongst"]//div[@class="td w0"]//div[@class="text"]//b/@title')
 
-    if not id:
-        return "请输入正确的歌曲名称"
     id = [i.strip('/song?id==') for i in id]
     return zip(name, artist, id)
 
@@ -123,8 +123,6 @@ def search_input_artist(url):
     root = etree.HTML(html)
     id = root.xpath('//div[@class="u-cover u-cover-5"]/a[1]/@href')
 
-    if not id:
-        return "请输入正确的歌手名称"
     return id[0].strip('/artist?id==')
 
 
@@ -137,8 +135,6 @@ def search_input_playlist(url):
     id = root.xpath('//div[@class="u-cover u-cover-3"]/a/@href')
     name = root.xpath('//div[@class="u-cover u-cover-3"]//span/@title')
 
-    if not id:
-        return "请输入正确的歌单名称"
     id = [i.strip('/playlist?id==') for i in id]
     return zip(name, id)
 
