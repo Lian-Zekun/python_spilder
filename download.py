@@ -89,17 +89,14 @@ def song_id_down(id):
 def selenium_get_html(url):
     """通过selenium获得页面源码"""
 
-    try:
-        options = webdriver.ChromeOptions()
-        options.add_argument(
-            'User-Agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36"')
-        options.add_argument('--headless')
-        driver = webdriver.Chrome(chrome_options=options)
-        driver.get(url)
-        driver.switch_to.frame('contentFrame')
-        return driver.page_source
-    except:
-        pass
+    options = webdriver.ChromeOptions()
+    options.add_argument(
+        'User-Agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36"')
+    options.add_argument('--headless')
+    driver = webdriver.Chrome(chrome_options=options)
+    driver.get(url)
+    driver.switch_to.frame('contentFrame')
+    return driver.page_source
 
 
 def search_input_song(url):
@@ -216,3 +213,4 @@ if __name__ == '__main__':
             main(name, choose_id)
             print("3秒后返回主页面")
             time.sleep(3)
+
