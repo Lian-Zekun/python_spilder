@@ -97,7 +97,6 @@ def selenium_get_html(url):
     driver = webdriver.Chrome(chrome_options=options)
     driver.get(url)
     driver.switch_to.frame('contentFrame')
-    driver.close()
     return driver.page_source
 
 
